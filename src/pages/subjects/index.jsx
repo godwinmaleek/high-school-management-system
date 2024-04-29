@@ -6,7 +6,7 @@ import Layout from "../../layout";
 import ClassStat from "./components/stat";
 // import DashboardStat from "./components/stat";
 
-export default function ClassAndSubjects() {
+export default function Subjects() {
   return (
     <Layout>
       <ClassStat />

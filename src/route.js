@@ -2,7 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import Student from "./pages/student";
 import Teacher from "./pages/teacher";
-import ClassAndSubjects from "./pages/classes&subjects";
+
+import Subjects from "./pages/subjects";
 
 const routes = createBrowserRouter([
   {
@@ -18,8 +19,8 @@ const routes = createBrowserRouter([
     path: "/teachers",
   },
   {
-    element: <ClassAndSubjects />,
-    path: "/class",
+    element: <Subjects />,
+    path: "/subjects",
   },
 ]);
 

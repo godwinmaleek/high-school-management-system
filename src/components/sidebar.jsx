@@ -33,8 +33,8 @@ const navigation = [
     current: false,
   },
   {
-    name: "Topics",
-    href: "/topics",
+    name: "Subjects",
+    href: "/subjects",
     icon: ChatBubbleLeftRightIcon,
     current: false,
   },
