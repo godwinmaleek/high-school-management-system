@@ -50,7 +50,7 @@ const TABLE_ROWS = [
 export default function TeacherTable({ handleOpenForm }) {
   //   const [value, setValue] = React.useState("react");
   return (
-    <Card className="h-full w-full">
+    <Card className="h-full w-full shadow-none">
       <CardHeader floated={false} shadow={false} className="rounded-none">
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
@@ -94,7 +94,7 @@ export default function TeacherTable({ handleOpenForm }) {
                       <Typography
                         variant="small"
                         color="blue-gray"
-                        className="font-normal cursor-default leading-none opacity-70 py-4 flex items-center gap-2"
+                        className="font-semibold cursor-default leading-none opacity-70 py-4 flex items-center gap-2"
                       >
                         {head} <ChevronUpDownIcon className="h-4 w-4" />
                       </Typography>
