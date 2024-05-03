@@ -7,7 +7,8 @@ import {
 } from "@material-tailwind/react";
 import { ChevronUpDownIcon, PencilIcon } from "@heroicons/react/16/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
-import { useState } from "react";
+import { Fragment, useState } from "react";
+import DeletDialog from "../../../components/delete-dialog";
 
 const TABLE_HEAD = [
   { name: "Name", allowSort: true },
@@ -106,8 +107,9 @@ const ALLSUBJECT = [
 //   },
 // ];
 export default function SubjectTable() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [showOption, setShowOption] = useState("");
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [showOption, setShowOption] = useState(null);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const handleOpen = (index, show) => {
     if (showOption === show && activeIndex === index) {
@@ -119,98 +121,105 @@ export default function SubjectTable() {
     setActiveIndex(index);
   };
   return (
-    <ul className="flex flex-col divide divide-gray-200  shadow shadow-sm">
-      <li className="p-2 flex items-center border-y border-blue-gray-100 bg-blue-gray-50/50 px-4">
-        {TABLE_HEAD.map(({ name, allowSort }, key) => (
-          <Typography
-            key={key + name}
-            variant="small"
-            color="blue-gray"
-            className="min-w-44 font-semibold cursor-default leading-none opacity-70 py-4 flex items-center gap-4"
-          >
-            {name}
-            {allowSort && <ChevronUpDownIcon className="h-4 w-4" />}
-          </Typography>
-        ))}
-      </li>
-      {ALLSUBJECT.map(
-        ({ subject_name, id, num_of_teachers, teachers }, subjectIndex) => {
-          // const subjectInfoClass =
-          //   subjectIndex === activeIndex
-          //     ? "max-h-96 py-4 bg-gray-50 px-4 transition transition-all linear duration-300"
-          //     : "max-h-0 bg-gray-50 px-4 overflow-hidden transition linear transition-all duration-300";
-          return (
-            <li
-              className={`border-b border-blue-gray-100 ${
-                subjectIndex === activeIndex
-                  ? "border-l-2 !border-l-blue-300"
-                  : ""
-              }`}
-            >
-              <Accordion
-                key={id + subject_name}
-                open={activeIndex === subjectIndex}
-              >
-                <div className="p-4 bg-white flex items-center">
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="min-w-44 font-normal"
-                  >
-                    {subject_name}
-                  </Typography>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="min-w-44 font-normal"
-                  >
-                    {num_of_teachers}
-                  </Typography>
-
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="min-w-44 cursor-pointer"
-                    onClick={() => handleOpen(subjectIndex, "view")}
-                  >
-                    view
-                  </Typography>
-                  <div className="min-w-44 cursor-pointer">
-                    <PencilIcon
-                      onClick={() => handleOpen(subjectIndex, "edit")}
-                      className="text-blue-gray-500 h-4 w-4"
-                    />
-                  </div>
-                  <div className="min-w-44 cursor-pointer">
-                    <TrashIcon className=" text-blue-gray-500 h-4 w-4" />
-                  </div>
-                </div>
-                <AccordionBody key={subjectIndex}>
-                  {/* subject info */}
-
-                  {/* {showOption === "view" && activeIndex === subjectIndex ? ( */}
-                  <SubjectDetails
-                    display={
-                      showOption === "view" && activeIndex === subjectIndex
-                    }
-                    teachers={teachers}
-                  />
-                  {/* ) : null} */}
-                  {/* {showOption === "edit" && activeIndex === subjectIndex ? ( */}
-                  <SubjectEditForm
-                    display={
-                      showOption === "edit" && activeIndex === subjectIndex
-                    }
-                    currentName={subject_name}
-                  />
-                  {/* ) : null} */}
-                </AccordionBody>
-              </Accordion>
-            </li>
-          );
+    <Fragment>
+      <DeletDialog
+        open={openDeleteDialog}
+        setOpen={(value) => setOpenDeleteDialog(value)}
+        title={"Delete Subject"}
+        text={
+          "Are you sure you want to delete this subject? All of your data will be permanently removed. This action cannot be undone."
         }
-      )}
-    </ul>
+      />
+      <ul className="flex flex-col divide divide-gray-200  shadow shadow-sm">
+        <li className="p-2 flex items-center border-y border-blue-gray-100 bg-blue-gray-50/50 px-4">
+          {TABLE_HEAD.map(({ name, allowSort }, key) => (
+            <Typography
+              key={key + name}
+              variant="small"
+              color="blue-gray"
+              className="min-w-44 font-semibold cursor-default leading-none opacity-70 py-4 flex items-center gap-4"
+            >
+              {name}
+              {allowSort && <ChevronUpDownIcon className="h-4 w-4" />}
+            </Typography>
+          ))}
+        </li>
+        {ALLSUBJECT.map(
+          ({ subject_name, id, num_of_teachers, teachers }, subjectIndex) => {
+            const typography =
+              activeIndex === subjectIndex ? "font-semibold" : "font-normal";
+            return (
+              <li
+                className={`border-b border-blue-gray-100 ${
+                  subjectIndex === activeIndex
+                    ? "border-l-2 !border-l-blue-300"
+                    : ""
+                }`}
+              >
+                <Accordion
+                  key={id + subject_name}
+                  open={activeIndex === subjectIndex}
+                >
+                  <div className="p-4 bg-white flex items-center">
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className={`min-w-44 ${typography}`}
+                    >
+                      {subject_name}
+                    </Typography>
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className={`min-w-44 ${typography}`}
+                    >
+                      {num_of_teachers}
+                    </Typography>
+
+                    <Typography
+                      variant="small"
+                      color="blue-gray"
+                      className={`min-w-44 cursor-pointer ${typography}`}
+                      onClick={() => handleOpen(subjectIndex, "view")}
+                    >
+                      view
+                    </Typography>
+                    <div className="min-w-44 cursor-pointer">
+                      <PencilIcon
+                        onClick={() => handleOpen(subjectIndex, "edit")}
+                        className="text-blue-gray-500 h-4 w-4"
+                      />
+                    </div>
+                    <div className="min-w-44 cursor-pointer">
+                      <TrashIcon
+                        onClick={() => setOpenDeleteDialog(true)}
+                        className="text-blue-gray-500 h-4 w-4"
+                      />
+                    </div>
+                  </div>
+                  <AccordionBody key={subjectIndex}>
+                    {/* subject info */}
+
+                    <SubjectDetails
+                      display={
+                        showOption === "view" && activeIndex === subjectIndex
+                      }
+                      teachers={teachers}
+                    />
+                    <SubjectEditForm
+                      display={
+                        showOption === "edit" && activeIndex === subjectIndex
+                      }
+                      currentName={subject_name}
+                    />
+                  </AccordionBody>
+                </Accordion>
+              </li>
+            );
+          }
+        )}
+      </ul>
+    </Fragment>
   );
 }
 
@@ -230,18 +239,18 @@ const SubjectDetails = ({ teachers, display }) => {
           Teachers taking this subject
         </Typography>
         <ul>
-          <li className="flex items-center">
+          <li className="flex items-center border-b border-blue-gray-100 pb-2">
             <Typography
               variant="small"
               color="blue-gray"
-              className="min-w-44 font-semibold text-xs"
+              className="min-w-44 text-xs"
             >
               Name
             </Typography>
             <Typography
               variant="small"
               color="blue-gray"
-              className="min-w-44 font-semibold text-xs"
+              className="min-w-44 text-xs"
             >
               Class Taught
             </Typography>
