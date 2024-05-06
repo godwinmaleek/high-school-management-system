@@ -11,10 +11,6 @@ import {
   CardFooter,
   IconButton,
   Tooltip,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
 } from "@material-tailwind/react";
 import React from "react";
 
@@ -97,7 +93,7 @@ export default function StudentTable({ handleOpenForm }) {
           </Button>
         </div>
       </CardHeader>
-      <CardBody className="overflow-scroll px-0">
+      <CardBody className="overflow-hidden px-0">
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
@@ -106,22 +102,13 @@ export default function StudentTable({ handleOpenForm }) {
                   key={head}
                   className="border-y border-blue-gray-100 bg-blue-gray-50/50 px-4"
                 >
-                  <Menu className="dropdown">
-                    <MenuHandler>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-semibold cursor-default leading-none opacity-70 py-4 flex items-center gap-2"
-                      >
-                        {head} <ChevronUpDownIcon className="h-4 w-4" />
-                      </Typography>
-                    </MenuHandler>
-                    <MenuList>
-                      <MenuItem>Menu Item 1</MenuItem>
-                      <MenuItem>Menu Item 2</MenuItem>
-                      <MenuItem>Menu Item 3</MenuItem>
-                    </MenuList>
-                  </Menu>
+                  <Typography
+                    variant="small"
+                    color="blue-gray"
+                    className="font-semibold cursor-default leading-none opacity-70 py-4 flex items-center gap-2"
+                  >
+                    {head} <ChevronUpDownIcon className="h-4 w-4" />
+                  </Typography>
                 </th>
               ))}
             </tr>
@@ -194,9 +181,9 @@ export default function StudentTable({ handleOpenForm }) {
                       </Typography>
                     </td>
                     <td className={classes}>
-                      <Tooltip content="Edit User">
+                      <Tooltip content="Edit Student">
                         <IconButton variant="text">
-                          <PencilIcon className="h-4 w-4" />
+                          <PencilIcon className="text-blue-gray-500 h-4 w-4" />
                         </IconButton>
                       </Tooltip>
                     </td>

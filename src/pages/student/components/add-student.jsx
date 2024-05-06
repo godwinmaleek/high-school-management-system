@@ -72,6 +72,16 @@ export function NewStudentForm() {
               color="blue"
             />
           </div>
+          <div className="sm:col-span-2">
+            <Input
+              type="date"
+              label="Date of birth"
+              size="lg"
+              variant="standard"
+              className="placeholder:text-gray-400 text-base sm:text-sm sm:leading-6"
+              color="blue"
+            />
+          </div>
           <fieldset className="sm:col-span-full">
             <legend className="text-sm font-semibold leading-6 text-gray-900">
               Gender

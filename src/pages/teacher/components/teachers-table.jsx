@@ -80,7 +80,7 @@ export default function TeacherTable({ handleOpenForm }) {
           </Button>
         </div>
       </CardHeader>
-      <CardBody className="overflow-scroll px-0">
+      <CardBody className="overflow-hidden px-0">
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
@@ -159,7 +159,7 @@ export default function TeacherTable({ handleOpenForm }) {
                     <td className={classes}>
                       <Tooltip content="Edit User">
                         <IconButton variant="text">
-                          <PencilIcon className="h-4 w-4" />
+                          <PencilIcon className="text-blue-gray-500 h-4 w-4" />
                         </IconButton>
                       </Tooltip>
                     </td>

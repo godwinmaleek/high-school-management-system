@@ -85,7 +85,7 @@ export function NewTeacherForm() {
     <form className="w-3/4 mx-auto space-y-12 divide-y divide-gray-300">
       <div className="">
         <h2 className="text-base font-semibold leading-7 text-gray-900">
-          Student Information
+          Teacher's Information
         </h2>
 
         <div className="mt-10 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-6">
@@ -110,7 +110,7 @@ export function NewTeacherForm() {
           </div>
           <div className="sm:col-span-2">
             <Input
-              label="Other name"
+              label="Email Adress"
               size="lg"
               variant="standard"
               className="placeholder:text-gray-400 text-base sm:text-sm sm:leading-6"
