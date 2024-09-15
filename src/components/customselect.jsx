@@ -41,7 +41,7 @@ export function Dropdown({ dropDownOption, allowSearch }) {
         ? selected
             .slice(0, 3)
             .join(", ")
-            .concat(` ${selected.length - 3} and more`)
+            .concat(` and ${selected.length - 3} more`)
         : selected.join(", ");
 
     setSelectedOption(selected);
@@ -122,7 +122,7 @@ export function Dropdown({ dropDownOption, allowSearch }) {
         </MenuHandler>
         <MenuList
           ref={menuListRef}
-          className={"relative z-[9999999999] shadow shadow-sm max-h-72"}
+          className={"relative z-[9999999999] shadow-sm max-h-72"}
         >
           {allowSearch && (
             <Input
