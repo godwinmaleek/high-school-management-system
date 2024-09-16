@@ -61,7 +61,7 @@ export function Dropdown({ dropDownOption, allowSearch }) {
 
       setOption(sortedOptions);
     }
-  }, [open]);
+  }, [open, options]);
 
   return (
     <div className="relative w-full">
